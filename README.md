@@ -12,7 +12,8 @@
 4. Enjoy an engaging game environment, with background music and sound effects that make the game more fun and immersive.
 
 ## Wireframe
-
+!["firstpage"](./wieframe/image1.jpg)
+!["gamepage"](./wieframe/image1.jpg)
 https://wireframe.cc/9Ssij3
 https://wireframe.cc/UHeoxs
 
