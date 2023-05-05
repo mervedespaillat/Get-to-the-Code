@@ -11,8 +11,10 @@ In "Get to the Code", users will be able to:
     3- Score points for collecting power-ups and avoiding distractions, with a high score leaderboard to keep track of their progress.
     4- Enjoy an engaging game environment, with background music and sound effects that make the game more fun and immersive.
 
-https://wireframe.cc/9Ssij3
-https://wireframe.cc/UHeoxs
+Wireframe
+
+    https://wireframe.cc/9Ssij3
+    https://wireframe.cc/UHeoxs
 
 
 Technologies and Libraries:
