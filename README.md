@@ -28,27 +28,27 @@ https://wireframe.cc/UHeoxs
 
 ### Friday Afternoon & Weekend:
 
--Plan and design the game mechanics, including the character movements, obstacles, and power-ups.
--Create a basic game environment using HTML, CSS, and JavaScript.
--Implement the character movements and basic game controls using arrow keys.
+- Plan and design the game mechanics, including the character movements, obstacles, and power-ups.
+- Create a basic game environment using HTML, CSS, and JavaScript.
+- Implement the character movements and basic game controls using arrow keys.
 
 ### Monday:
 
--Add distractions like social media icons, and implement the ability to jump over or destroy them.
--Add power-ups like coffee and energy bars, and implement their effects on the character's energy levels and score.
+- Add distractions like social media icons, and implement the ability to jump over or destroy them.
+- Add power-ups like coffee and energy bars, and implement their effects on the character's energy levels and score.
 
 ### Tuesday:
 
--Implement different levels of difficulty with more obstacles and distractions.
--Test and adjust game play as necessary.
+- Implement different levels of difficulty with more obstacles and distractions.
+- Test and adjust game play as necessary.
 
 ### Wednesday:
 
--Implement sound effects and background music.
--Refine the game's graphics and user interface.
--Test and debug the game thoroughly, fixing any issues or bugs that arise
+- Implement sound effects and background music.
+- Refine the game's graphics and user interface.
+- Test and debug the game thoroughly, fixing any issues or bugs that arise
 
 ### Thursday:
 
--Make any final adjustments as necessary.
--Share the game with classmates. 
+- Make any final adjustments as necessary.
+- Share the game with classmates. 
