@@ -12,8 +12,9 @@
 4. Enjoy an engaging game environment, with background music and sound effects that make the game more fun and immersive.
 
 ## Wireframe
-!["firstpage"](./wieframe/image1.jpg)
-!["gamepage"](./wieframe/image1.jpg)
+
+![Image 5-5-23 at 12 06 AM](https://user-images.githubusercontent.com/102131320/236465297-d768a079-c8a4-4616-943f-ffbf83dbecae.jpg)
+![Image 5-5-23 at 12 05 AM](https://user-images.githubusercontent.com/102131320/236465149-d83c9626-3516-465a-bf6b-70b6ee4038f7.jpg)
 
 
 ## Technologies and Libraries:
@@ -23,7 +24,7 @@
 - HowlerJS    
 
 
-## Implementation Timeline
+
 
 ### Friday Afternoon & Weekend:
 
