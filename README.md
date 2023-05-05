@@ -14,8 +14,6 @@
 ## Wireframe
 !["firstpage"](./wieframe/image1.jpg)
 !["gamepage"](./wieframe/image1.jpg)
-https://wireframe.cc/9Ssij3
-https://wireframe.cc/UHeoxs
 
 
 ## Technologies and Libraries:
