@@ -1,9 +1,22 @@
-import Example from './scripts/example';
+import Game from './scripts/game';
 
-document.addEventListener("DOMContentLoaded", () =>{
-    console.log("hello world")
+    document.addEventListener("DOMContentLoaded", function(){
+         const canvasEl = document.getElementById("main-canvas")
 
-    const main = document.getElementById('main');
-    new Example(main)
-})
+            new Game(canvasEl)
 
+            console.log("hello")
+        
+        })
+
+        // const canvasEl = document.getElementById("main-canvas")
+        // canvasEl.width = 1100
+        // canvasEl.height = 600
+        
+        // const ctx = canvasEl.getContext("2d")
+        // ctx.fillStyle = "beige"
+        // ctx.fillRect(280,100, 1100, 600)
+ 
+
+
+        
