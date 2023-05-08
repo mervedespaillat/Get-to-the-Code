@@ -1,11 +1,12 @@
 import Game from './scripts/game';
 
-    document.addEventListener("DOMContentLoaded", function(){
+    window.addEventListener("load", function(){
          const canvasEl = document.getElementById("main-canvas")
 
-            new Game(canvasEl)
-
+          const game =   new Game(canvasEl)
+            game.animate()
             console.log("hello")
+            
         
         })
 
