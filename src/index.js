@@ -1,9 +1,16 @@
-import Example from './scripts/example';
+import Game from './scripts/game';
 
-document.addEventListener("DOMContentLoaded", () =>{
-    console.log("hello world")
+    window.addEventListener("load", function(){
+         const canvasEl = document.getElementById("main-canvas")
 
-    const main = document.getElementById('main');
-    new Example(main)
-})
+          const game =   new Game(canvasEl)
+            game.animate()
+            console.log("hello")
+            
+        
+        })
 
+ 
+
+
+        
