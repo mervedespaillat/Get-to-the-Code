@@ -6,12 +6,12 @@ class Face {
   constructor(canvas) {
     this.dimensions = {
       x: 100,
-      y: 100, 
+      y: 300, 
     };
 
     this.velocity = {
       x: 0,
-      y: 1,
+      y: 2,
     };
     this.canvas = canvas
 
@@ -80,6 +80,7 @@ class Face {
        else if (this.spaceKey) {
         this.velocity.y = -this.yspeed;
       } else if(this.dimensions.y + this.height + this.velocity.y < this.canvas.height) {
+        // this.velocity.y = 1
         this.velocity.y += CONSTANT.gravity
       }
       else {

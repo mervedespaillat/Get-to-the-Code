@@ -60,7 +60,6 @@ class Game {
     this.face.draw(this.ctx)
     this.face.step()
 
-    console.log("jsdjksf")
     requestAnimationFrame(this.animate.bind(this))
   }
 
