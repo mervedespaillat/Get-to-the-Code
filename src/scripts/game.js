@@ -9,7 +9,7 @@ class Game {
         console.log("ol")
         this.canvas.width = 500;
         this.canvas.height = 400;
-        this.face = new Face()
+        this.face = new Face(this.canvas)
 
         // this.level = new Level(0,350)
         this.ctx = this.canvas.getContext("2d")
