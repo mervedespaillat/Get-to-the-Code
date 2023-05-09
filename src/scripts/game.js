@@ -3,7 +3,8 @@ import Level from "./level";
 import Platform from "./platform";
 import PowerUps from "./powerups";
 import Cloud from "./cloud";
-import Enemies from "./enemies";
+import { Enemy } from "./enemy";
+
 
 class Game {
   constructor(canvasEl) {
@@ -11,18 +12,11 @@ class Game {
     console.log("ol");
     this.canvas.width = 800;
     this.canvas.height = 400;
-    // this.canvas.setAttribute('style', "position: absolute;  left: 50%;margin-left:-400px; top: 50%;margin-top:-300px; border:2px solid blue")
     this.face = new Face(this.canvas);
-
-    // this.level = new Level(0,350)
     this.ctx = this.canvas.getContext("2d");
-    // this.background = new Image ()
-    // this.background.src = "src/images/5246723.jpg"
-    // this.background.width = 1024
-    // this.background.height = 1000
 
-    this.levelFloor = [];
     // Create bottom platform
+    this.levelFloor = [];
     let x = 0;
     for (let i = 0; i < 16; i++) {
       let y = 365;
@@ -49,8 +43,10 @@ class Game {
     this.face.setupInputs();
 
     this.powers = [new PowerUps(200, 335), new PowerUps(160, 205)];
-    this.enemies = [new Enemies(130, 200), new Enemies(400, 240)];
+    this.enemies = [new Enemy(130, 200), new Enemy(400, 240)];
   }
+
+
 
   animate() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -60,27 +56,25 @@ class Game {
     this.drawLevel();
     this.drawPlatform();
     this.drawPower();
-    this.drawCloud();
-    this.drawEnemies();
     this.face.draw(this.ctx);
+    this.drawCloud();
     this.face.step();
-    // this.face.jump();
+    this.face.jump();
     this.jumpOnce();
-
-   
+    this.drawEnemy()
+    for(let i= 0; i < this.enemies.length; i++){
+        this.enemies[i].move()
+    }
 
     requestAnimationFrame(this.animate.bind(this));
   }
+
 
   play() {}
 
   restart() {}
 
   gameover() {}
-
-  // drawBackground(){
-  //     this.ctx.drawImage(this.background, 0, 0, this.background.width, this.background.height)
-  // }
 
   drawCanvas() {
     this.ctx.fillStyle = "#D8EDF3";
@@ -100,11 +94,11 @@ class Game {
     }
   }
 
-  drawEnemies() {
-    for (let i = 0; i < this.enemies.length; i++) {
-      this.enemies[i].draw(this.ctx);
+    drawEnemy(){
+            for (let i = 0; i < this.enemies.length; i++) {
+                this.enemies[i].draw(this.ctx);
+            }
     }
-  }
 
   drawPlatform() {
     for (let i = 0; i < this.platforms.length; i++) {
@@ -117,14 +111,6 @@ class Game {
       this.powers[i].draw(this.ctx);
     }
   }
-
-  // stand(){
-  //     for(let i = 0; i < this.platforms.length; i++){
-  //    if(this.face.dimensions.y + this.face.height <= this.platforms[i].dimensions.y) {
-  //     this.face.velocity.y = 0
-  //    }
-  // }
-  // }
 
   stand() {
     this.levelFloor.concat(this.platforms).forEach((ele) => {
@@ -143,9 +129,7 @@ class Game {
 
   jumpOnce(){
     const platform = this.levelFloor.concat(this.platforms)
-// console.log(platform[17].x)
-    // console.log(platform[0].y)
-    console.log(this.face.dimensions.y + this.face.height)
+
     for (let i = 0; i < platform.length; i++){
         if(this.face.dimensions.y + this.face.height === platform[i].y &&
             this.face.dimensions.x + this.face.width/2  > platform[i].x && 
@@ -158,30 +142,6 @@ class Game {
     
   }
 
-  enemyMove(){
-     // for(let i = 0; i < this.enemies.length; i++){
-    //     this.enemies[i].enemyMove()
-    // }
-  }
 }
-
-// document.addEventListener("DOMContentLoaded", function(){
-// const main = document.getElementById('main');
-// new Example(main)
-
-// const canvasEl = document.getElementById("main-canvas")
-// canvasEl.width = 700
-// canvasEl.height = 500
-
-// const ctx = canvasEl.getContext("2d")
-// ctx.fillStyle = "beige"
-// ctx.fillRect(50,50, 700, 500)
-
-// })
-
-// detectPlayerPlatfromCollison(){
-//     //for loop is better, her platfrom u check eger face platfrom un uzerinde mi bunlar face this.pos.y+this.this.height === this.pos.y => bu platfrom
-//     //
-// }
 
 export default Game;

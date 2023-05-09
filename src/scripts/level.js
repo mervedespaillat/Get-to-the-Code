@@ -15,16 +15,4 @@ class Level{
     }
 }
 
-    // draw(ctx) {
-    //     const img = new Image();
-    //     img.src = "./src/images/binary-code7.png";
-    //     img.onload = () => {
-    //         // When the happyFace is loaded, draw it onto the canvas
-    //         ctx.drawImage(img, 0, 350, 50, 50);
-    //       };    
-    //     }
- 
-
-
-
 export default Level;
