@@ -8,13 +8,15 @@
   margin-top: 150;
   display: block;
   width: 800px;
+  height: fit-content;
   text-align: center;
   justify-content: center;
+  border: 10px solid #3E872B;
 }
 
 #game-title {
   font-family: fantasy;
-  color: whitesmoke;
+  color: #3E872B;
   text-align: center;
   margin-top: 10px;
   justify-content: center;
@@ -22,7 +24,7 @@
 }
 
 body {
-  background-image: url("../src/images/bedroom.jpg");
+  background-image: url("../src/images/office.jpg");
   background-color: salmon;
   background-repeat: no-repeat;
   background-attachment: fixed;

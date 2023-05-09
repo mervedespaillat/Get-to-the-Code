@@ -20,8 +20,8 @@ class Face {
     this.width = 50;
     this.height = 50;
 
-    this.xspeed = 10;
-    this.yspeed =  9;
+    this.xspeed = 6;
+    this.yspeed =  12;
     this.friction = 0.6;
     this.maxSpeed = 10;
 
@@ -102,6 +102,13 @@ class Face {
 
 step() {
     if (this.active) {
+
+      // Update position
+      this.dimensions.x += this.velocity.x;
+      this.dimensions.y += this.velocity.y;
+      this.velocity.y += CONSTANT.gravity;
+
+
       //Horizantal
       if (this.rightKey) {
         //Slow Down
@@ -112,20 +119,17 @@ step() {
         this.velocity.x = 0;
       }
       
-      //Vertical
-      if (this.spaceKey && this.dimensions.y > 0) {
-        this.velocity.y = -this.yspeed;
-      } else if (this.dimensions.y + this.height + this.velocity.y < this.canvas.height) {
-        this.velocity.y += CONSTANT.gravity;
-      } else {
-        this.velocity.y = 0;
-      }
+    //   //Vertical
+    //   if (this.spaceKey && this.dimensions.y > 0) {
+    //     this.velocity.y = -this.yspeed;
+    //   } else if (this.dimensions.y + this.height + this.velocity.y < this.canvas.height) {
+    //     this.velocity.y += CONSTANT.gravity;
+    //   } else {
+    //     this.velocity.y = 0;
+    //   }
       
-      // Update position
-      this.dimensions.x += this.velocity.x;
-      this.dimensions.y += this.velocity.y;
       
-      // Keep face inside canvas
+      // Keep face inside canvas only for horizantal
       if (this.dimensions.x < 0) {
         this.dimensions.x = 0;
       } else if (this.dimensions.x + this.width > this.canvas.width) {
@@ -136,13 +140,22 @@ step() {
   
 
 
-// jump(){
-//     if (this.) {
-//      this.velocity.y = -this.yspeed;
-//     } else if(!this.spaceKey) {
-//     this.dimensions.y + this.height + this.velocity.y < this.canvas.height
-//     }
-// }
+jump(){
+    
+      //Vertical
+      if (this.spaceKey && this.dimensions.y > 0) {
+        this.velocity.y = -this.yspeed;
+        // console.log("jumping")
+      } else if (this.dimensions.y + this.height + this.velocity.y < this.canvas.height) {
+        // console.log("falling")
+        this.velocity.y += CONSTANT.gravity;
+      } else {
+        // console.log("stationary")
+        this.velocity.y = 0;
+      }
+
+
+}
 }
 
 
