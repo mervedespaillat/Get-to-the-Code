@@ -21,7 +21,7 @@ class Face {
     this.height = 50;
 
     this.xspeed = 6;
-    this.yspeed =  12;
+    this.yspeed =  10;
     // this.friction = 0.6;
     // this.maxSpeed = 10;
 

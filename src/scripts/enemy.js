@@ -66,7 +66,7 @@ export class Enemy{
     //   }
 
     move(){
-      this.x -= this.xspeed
+      this.x += this.xspeed
     }
   
 }

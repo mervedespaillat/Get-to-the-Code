@@ -14,6 +14,8 @@ class Game {
     this.canvas.height = 400;
     this.face = new Face(this.canvas);
     this.ctx = this.canvas.getContext("2d");
+    this.score = 0
+    
 
     // Create bottom platform
     this.levelFloor = [];
@@ -38,11 +40,15 @@ class Game {
 
       new Platform(360, 270),
       new Platform(400, 270),
+
+      new Platform(700, 250),
+      new Platform(660, 250),
+      new Platform(620, 250)
     ];
 
     this.face.setupInputs();
 
-    this.powers = [new PowerUps(200, 335), new PowerUps(160, 205)];
+    this.powers = [new PowerUps(200, 335), new PowerUps(160, 200), new PowerUps(660,220)];
     this.enemies = [new Enemy(130, 200), new Enemy(400, 240)];
   }
 
@@ -62,6 +68,7 @@ class Game {
     this.face.jump();
     this.jumpOnce();
     this.drawEnemy()
+    this.drinkCoffee()
     for(let i= 0; i < this.enemies.length; i++){
         this.enemies[i].move()
     }
@@ -79,7 +86,11 @@ class Game {
   drawCanvas() {
     this.ctx.fillStyle = "#D8EDF3";
     this.ctx.fillRect(0, 0, 800, 400);
-    // this.ctx.globalAlpha = 0.0;
+// debugger
+    this.ctx.strokeText(`Score: ${this.score}`, 20, 20)
+    this.ctx.font = "20px Arial"
+
+
   }
 
   drawLevel() {
@@ -141,6 +152,24 @@ class Game {
     }
     
   }
+
+  drinkCoffee(){
+    for(let i= 0; i < this.powers.length; i++){
+        const coffee = this.powers[i]
+        // console.log(this.face.dimensions.y + this.face.height)
+        if(this.face.dimensions.y + this.face.height === coffee.y + coffee.height &&
+            this.face.dimensions.x + this.face.width/2  > coffee.x &&
+            this.face.dimensions.x + this.face.width/2 < coffee.x + coffee.width){
+            //    console.log("coffee crush")
+            //    debugger
+               this.powers = this.powers.slice(0,i).concat(this.powers.slice(i+1))
+               this.score += 50
+               // add here score up after coffee got eaten
+            //    debugger
+            }
+    }
+  }
+
 
 }
 
