@@ -65,33 +65,86 @@ export class Enemy{
     //     }
     //   }
 
-    move(){
+    move(canvas){
       this.x += this.xspeed
+
+      if (this.x < 0) {
+        this.x = 0;
+      } else if (this.x + this.width > canvas.width) {
+        this.x = this.canvas.width - this.width;
+      }
     }
+
+
   
 }
 
 
-// export class TwitterEnemy extends Enemy{
-//     constructor(){
-//         super()
-//         this.width =30
-//         this.height = 30 
-//         this.x = 200
-//         this.y = 200
-//         this.speedX = 2
-//         this.maxFrame = 5
-//         this.image = new Image();
-//         this.image.src = "src/images/twitter-bird-icon.png";
+export class TwitterEnemy extends Enemy{
+    constructor(x,y){
+      super()
+      this.x = x
+      this.y = y
+      this.image = new Image();
+      this.image.src = "src/images/twitter-bird-icon.png";
+      this.width = 30;
+      this.height = 30;
 
-//     }
-//     update(deltaTime){
-//         super.update(deltaTime)
-//     }
+      this.velocity = {
+          x: 0,
+          y: 1,
+        };
 
+      this.xspeed = 0.5
+      this.yspeed = 1
+    }
+move(){
+  this.x += this.xspeed
+}
+}
 
-// }
+export class InstaEnemy extends Enemy{
+  constructor(x,y){
+    super()
+    this.x = x
+    this.y = y
+    this.image = new Image();
+    this.image.src = "src/images/instagram.png";
+    this.width = 30;
+    this.height = 30;
 
-// export class YoutubeEnemy extends Enemy{
+    this.velocity = {
+        x: 0,
+        y: 1,
+      };
 
-// }
+    this.xspeed = 0.5
+    this.yspeed = 1
+  }
+move(){
+this.x += this.xspeed
+}
+}
+
+export class YoutubeEnemy extends Enemy{
+  constructor(x,y){
+    super()
+    this.x = x
+    this.y = y
+    this.image = new Image();
+    this.image.src = "src/images/youtube.png";
+    this.width = 30;
+    this.height = 30;
+
+    this.velocity = {
+        x: 0,
+        y: 1,
+      };
+
+    this.xspeed = 0.5
+    this.yspeed = 1
+  }
+move(){
+this.x += this.xspeed
+}
+}

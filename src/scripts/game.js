@@ -3,7 +3,7 @@ import Level from "./level";
 import Platform from "./platform";
 import PowerUps from "./powerups";
 import Cloud from "./cloud";
-import { Enemy } from "./enemy";
+import { InstaEnemy, TwitterEnemy, YoutubeEnemy, Enemy } from "./enemy";
 
 
 class Game {
@@ -14,7 +14,16 @@ class Game {
     this.canvas.height = 400;
     this.face = new Face(this.canvas);
     this.ctx = this.canvas.getContext("2d");
+
+    //background music
+    this.backgroundMusic = new Audio("src/audio/Space-Jazz.mp3")
+    this.musicPaused = false
+    
+    //Game logic, score, win, lose
     this.score = 0
+    this.gameOver = false
+    this.gameWin = false
+    this.pause = false
     
 
     // Create bottom platform
@@ -49,7 +58,7 @@ class Game {
     this.face.setupInputs();
 
     this.powers = [new PowerUps(200, 335), new PowerUps(160, 200), new PowerUps(660,220)];
-    this.enemies = [new Enemy(130, 200), new Enemy(400, 240)];
+    this.enemies = [new TwitterEnemy(130, 200), new TwitterEnemy(400, 240), new InstaEnemy(300,335), new YoutubeEnemy(0,335)];
   }
 
 
@@ -67,8 +76,14 @@ class Game {
     this.face.step();
     this.face.jump();
     this.jumpOnce();
-    this.drawEnemy()
-    this.drinkCoffee()
+    this.drawEnemy();
+    // this.startMusic();
+    // this.pauseMusic();
+
+    
+    this.drinkCoffee(); 
+    // this.restart()
+
     for(let i= 0; i < this.enemies.length; i++){
         this.enemies[i].move()
     }
@@ -170,6 +185,43 @@ class Game {
     }
   }
 
+  //audio
+
+  startMusic(){
+    this.backgroundMusic.play()
+
+  }
+
+  pauseMusic(){
+    const pause = document.getElementById("pause")
+        pause.addEventListener("click", ()=>{
+
+            if(this.musicPaused === false){
+                this.backgroundMusic.stop() 
+            }
+            this.musicPaused = true
+  })
+}
+
+resumeMusic(){
+    const pause = document.getElementById("pause")
+    pause.addEventListener("click", ()=>{
+        if(musicPaused === true){
+            this.backgroundMusic.play() 
+        }
+        this.musicPaused = false
+})
+}
+
+
+
+
+//   restart(){
+//     const pause = document.getElementById("restart")
+//     pause.addEventListener("click", ()=>{
+//             this.animate() 
+//     })
+//   }
 
 }
 

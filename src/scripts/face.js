@@ -1,8 +1,8 @@
 import Platform from "./platform";
 
 const CONSTANT = {
-    gravity: 0.5
-}
+    gravity: 1 
+ }
 
 class Face {
   constructor(canvas) {
@@ -20,10 +20,10 @@ class Face {
     this.width = 50;
     this.height = 50;
 
-    this.xspeed = 6;
-    this.yspeed =  10;
-    // this.friction = 0.6;
-    // this.maxSpeed = 10;
+    this.xspeed = 3;
+    this.yspeed =  7;
+    this.friction = 0.6;
+    this.maxSpeed = 10;
 
     this.active = true;
 
@@ -103,6 +103,7 @@ jump(){
         this.velocity.y += CONSTANT.gravity;
       } else {
         this.velocity.y = 0;
+        
       }
 }
 }

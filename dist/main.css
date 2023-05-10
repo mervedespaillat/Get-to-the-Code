@@ -34,6 +34,38 @@ body {
   background-size: cover;
 }
 
+#linkedin-logo {
+  position: absolute;
+  top: 130px;
+  left: 1130px;
+  height: 30px;
+  width: 30px;
+}
+
+#github-logo {
+  position: absolute;
+  top: 130px;
+  left: 1090px;
+  height: 30px;
+  width: 30px;
+}
+
+#pause {
+  position: absolute;
+  top: 130px;
+  left: 1050px;
+  height: 30px;
+  width: 30px;
+}
+
+#restart {
+  position: absolute;
+  top: 130px;
+  left: 1010px;
+  height: 30px;
+  width: 30px;
+}
+
 #main {
   color: pink;
 }
