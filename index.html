@@ -1,5 +1,4 @@
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,30 +6,79 @@
     <link rel="stylesheet" href="./dist/main.css" />
     <script src="./dist/main.js"></script>
     <title>Get to the Code</title>
-    <link rel="icon" type="image/x-icon" href="./src/images/binary-code6.png">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>            
-
+    <link rel="icon" type="image/x-icon" href="./src/images/binary-code6.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link href="./src/font/BrunoAceSC-Regular.ttf" rel="stylesheet" />
   </head>
 
-  <body>    
+  <body>
     <div id="">
-      <a href="https://www.linkedin.com/in/merve-do%C4%9Fan-espaillat-872298161/" target="_blank" >
-        <img  id ="linkedin-logo"  src="./src/images/linkedin.png" alt="linkedin logo">
+      <a
+        href="https://www.linkedin.com/in/merve-do%C4%9Fan-espaillat-872298161/"
+        target="_blank"
+      >
+        <img
+          id="linkedin-logo"
+          src="./src/images/linkedin.png"
+          alt="linkedin logo"
+        />
       </a>
       <a href="https://github.com/mervedespaillat" target="_blank">
-        <img id="github-logo" src="./src/images/github-sign.png" alt="github logo">
+        <img
+          id="github-logo"
+          src="./src/images/github-sign.png"
+          alt="github logo"
+        />
       </a>
-      <a href="#" >
-      <img id="pause" src="./src/images/pause.png" alt="pause button">
-    </a>
-    <a href="#">
-      <img id="restart" src="./src/images/restart.png" alt="restart-button">
-    </a>
-    <button type=""></button>
-  </div>
+
+      <img id="pause" src="./src/images/pause.png" alt="pause button" />
+
+      <a href="#">
+        <img id="restart" src="./src/images/restart.png" alt="restart-button" />
+      </a>
+    </div>
     <h1 id="game-title">Get to the code</h1>
     <div id="m-canvas">
-    <canvas id="main-canvas" ></canvas>
-  </div>
+      <canvas id="main-canvas"></canvas>
+    </div>
+    <!--put a div tag display: none or display: block in js to restart a game -->
+    <div id="mainpage-container"></div>
+    <div id="mainpage">
+        <div id="game-name">
+          <h1 id="mainh1">Get to the Code</h1>
+        </div>
+        <div id="howToPlay">
+          <h1 id="howToPlayh1">How To Play <img src="src/images/typing.png" alt="keyboard" height="60"></h1>
+          <ul id="howPlay">
+            <li>To move right press right arrow    <img
+              id="right-arrow"
+              src="./src/images/arrow-right.png"
+              alt="right arrow"
+              height="35"
+              width="35"
+            /></li><br>
+            <li>To move left press left arrow   <img
+              id="left-arrow"
+              src="./src/images/arrow-left.png"
+              alt="left arrow"
+              height="35"
+              width="35"
+            /></li><br>
+            <li>To jump press space <img src="src/images/space (1).png" alt="space" height="35" width="35"></li>
+          </ul>
+
+        </div>
+        <div id="explanation">
+          <p id="game-explanation">
+            In this game, you'll help a lazy coder dodge distractions like Instagram, Facebook, and Twitter on their way to their desk and laptop. Just remember, they only have three lives, so getting hit by a distraction is like getting hit by a bus - it's gonna hurt!</p>
+        </div>
+      <div id="buttons">
+        <button id="restart"> Restart</button>
+        <button id="play-btn">Play</button>
+      </div>
+    </div>
   </body>
 </html>
