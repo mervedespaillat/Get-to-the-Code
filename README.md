@@ -27,6 +27,7 @@
 -CSS   
 
 ## How to collect coffees
+  // 
   drinkCoffee() {
     for (let i = 0; i < this.powers.length; i++) {
       const coffee = this.powers[i];
