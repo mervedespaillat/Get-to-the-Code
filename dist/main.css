@@ -1,6 +1,14 @@
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&display=swap);
+/*!*****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss (1) ***!
+  \*****************************************************************************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Amatic+SC&family=Chakra+Petch:wght@600&display=swap);
+/*!*****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss (2) ***!
+  \*****************************************************************************************************************************************/
 #main-canvas {
   padding-right: 0;
   position: absolute;
@@ -18,12 +26,12 @@
 }
 
 #game-title {
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Chakra Petch", sans-serif;
   color: #3E872B;
   text-align: center;
   margin-top: 10px;
   justify-content: center;
-  font-size: 40px;
+  font-size: 100px;
 }
 
 body {
@@ -53,15 +61,31 @@ body {
 #pause {
   position: absolute;
   top: 130px;
-  left: 1050px;
+  left: 1010px;
   height: 30px;
   width: 30px;
 }
 
-#restart {
+#audio {
   position: absolute;
   top: 130px;
-  left: 1010px;
+  left: 970px;
+  height: 30px;
+  width: 30px;
+}
+
+#restart-btn {
+  position: absolute;
+  top: 130px;
+  left: 930px;
+  height: 30px;
+  width: 30px;
+}
+
+#home {
+  position: absolute;
+  top: 130px;
+  left: 1050px;
   height: 30px;
   width: 30px;
 }
@@ -74,6 +98,7 @@ body {
   width: 100%;
   background-color: white;
   opacity: 0.7;
+  display: block;
 }
 
 #mainpage {
@@ -86,10 +111,12 @@ body {
   border: 30px solid #372A8C;
   border-radius: 20px;
   box-shadow: 0 0 150px rgb(65, 48, 126);
+  display: block;
   background-color: #88DFF2;
 }
 
 #mainh1 {
+  font-family: "Chakra Petch", sans-serif;
   color: #D92365;
   font-size: 40px;
   text-align: center;
@@ -99,7 +126,8 @@ body {
 #howPlay {
   justify-content: start;
   color: #88DFF2;
-  font-size: 22px;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 19px;
 }
 
 #right-arrow {
@@ -133,8 +161,10 @@ body {
 }
 
 #howToPlayh1 {
+  font-family: "Chakra Petch", sans-serif;
   color: #88DFF2;
   text-align: center;
+  text-shadow: 0 0 5px #F2D544;
 }
 
 #buttons {
@@ -147,13 +177,27 @@ body {
   border: 4px inset #A62679;
   border-radius: 20px;
   box-shadow: 0 0 15px rgb(65, 48, 126);
+  text-align: center;
   background-color: #F2D544;
 }
 
 #play-btn {
-  justify-content: center;
-  align-items: center;
-  position: absolute;
+  background-color: rgb(65, 48, 126); /* Green background */
+  border: 2px dotted #88DFF2; /* Remove border */
+  color: white; /* White text */
+  padding: 6px 50px; /* Padding */
+  text-align: center; /* Center text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Make it a block element */
+  font-size: 16px; /* Font size */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Change cursor to hand on hover */
+  transition: background-color 0.3s; /* Add transition effect */
+  font-family: "Chakra Petch", sans-serif;
+}
+
+#play-btn:hover {
+  background-color: #A62679; /* Darker green on hover */
 }
 
 #explanation {
@@ -164,17 +208,18 @@ body {
   height: 350px;
   width: 180px;
   border: 4px dotted #F2D544;
-  border-radius: 20px;
+  border-radius: 30px;
   box-shadow: 0 0 15px rgb(65, 48, 126);
   background-color: #D92365;
 }
 
 #game-explanation {
+  font-family: "Chakra Petch", sans-serif;
   color: #88DFF2;
-  text-shadow: 0 0 5px #A62679;
+  text-shadow: 0 0 4px #F2D544;
   text-align: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 #main {
