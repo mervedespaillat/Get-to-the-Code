@@ -26,3 +26,18 @@
 -HTML
 -CSS   
 
+## How to collect coffees
+  drinkCoffee() {
+    for (let i = 0; i < this.powers.length; i++) {
+      const coffee = this.powers[i];
+      if (
+        this.face.dimensions.y + this.face.height ===
+          coffee.y + coffee.height &&
+        this.face.dimensions.x + this.face.width / 2 > coffee.x &&
+        this.face.dimensions.x + this.face.width / 2 < coffee.x + coffee.width
+      ) {
+        this.powers = this.powers.slice(0, i).concat(this.powers.slice(i + 1));
+        this.score += 50;
+      }
+    }
+  }
