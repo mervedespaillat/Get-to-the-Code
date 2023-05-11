@@ -1,16 +1,9 @@
 // @import url("./font/BrunoAceSC-Regular.ttf");
-@font-face {
-    font-family: "bruno";
-    src: url("./font/BrunoAceSC-Regular.ttf");
-}
+// @import url('https://fonts.googleapis.com/css2?family=Foldit&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Chakra+Petch:wght@600&display=swap');
 
-@font-face {
-    font-family: "Arcade";
-    src: url('font/ARCADE.TTF') format("truetype");
-    font-weight: normal;
-    font-style: normal;
-
-}
 
 @import './styles/example.scss'; // style icindeki css dosyasindakileri kullanmamizi saglar
 

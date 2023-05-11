@@ -32,8 +32,12 @@ class Face {
     this.leftKey = false;
     this.rightKey = false;
     this.spaceKey = false;
-    this.img = new Image();
-    this.img.src = "src/images/tired.png";
+    
+      this.img = new Image();
+      this.img.src = "src/images/tired.png";
+
+    // this.img = new Image();
+    // this.img.src = "src/images/tired.png";
   }
 
   draw(ctx) {

@@ -7,6 +7,7 @@ import { InstaEnemy, TwitterEnemy, YoutubeEnemy, Enemy } from "./enemy";
 import LevelEnd from "./levelend";
 import Birds from "./birds";
 import EndFlag from "./endFlag";
+import HappyFace from "./happyFace";
 
 class Game {
   
@@ -417,6 +418,7 @@ class Game {
   }
 
   gameWin() {
+    const happy = new HappyFace(this.face.dimensions.x, this.face.dimensions.y)
       if (
         this.face.dimensions.x < this.levelEnd.x + this.levelEnd.width &&
           this.face.dimensions.x + this.face.width > this.levelEnd.x &&
@@ -428,6 +430,7 @@ class Game {
       this.ctx.fillStyle = "green";
       this.ctx.textAlign = "center";
       this.ctx.fillText("You Win!", this.canvas.width / 2, this.canvas.height / 2);
+      happy.draw(this.ctx)
       this.winGame = true;
       }
     }
