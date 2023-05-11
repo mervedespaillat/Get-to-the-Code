@@ -13,7 +13,6 @@ class Game {
   
   constructor(canvasEl) {
     this.canvas = canvasEl;
-    console.log("ol");
     this.canvas.width = 800;
     this.canvas.height = 400;
     this.face = new Face(this.canvas);
@@ -402,17 +401,14 @@ class Game {
   drinkCoffee() {
     for (let i = 0; i < this.powers.length; i++) {
       const coffee = this.powers[i];
-      // console.log(this.face.dimensions.y + this.face.height)
       if (
         this.face.dimensions.y + this.face.height ===
           coffee.y + coffee.height &&
         this.face.dimensions.x + this.face.width / 2 > coffee.x &&
         this.face.dimensions.x + this.face.width / 2 < coffee.x + coffee.width
       ) {
-        //    console.log("coffee crush")
         this.powers = this.powers.slice(0, i).concat(this.powers.slice(i + 1));
         this.score += 50;
-        // add here score up after coffee got eaten
       }
     }
   }
@@ -425,7 +421,6 @@ class Game {
         this.face.dimensions.y <  this.levelEnd.y + this.levelEnd.y &&
         this.face.dimensions.y + this.face.height < this.levelEnd.y
       ) {
-        console.log("you win")
       this.ctx.font = "bold 60px Arial";
       this.ctx.fillStyle = "green";
       this.ctx.textAlign = "center";
@@ -493,12 +488,12 @@ class Game {
   setUpMusic() {
     const audio = document.getElementById("audio");
     audio.addEventListener("click", () => {
-      if (this.musicAudio === false) {
-        this.backgroundMusic.audio();
-        this.musicAudio = true;
+      if (this.musicPaused === false) {
+        this.backgroundMusic.pause()
+        this.musicPaused = true;
       } else {
         this.backgroundMusic.play();
-        this.musicAudio = false;
+        this.musicPaused = false;
       }
     });
   }
