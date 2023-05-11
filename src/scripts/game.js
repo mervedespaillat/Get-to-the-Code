@@ -5,8 +5,11 @@ import PowerUps from "./powerups";
 import Cloud from "./cloud";
 import { InstaEnemy, TwitterEnemy, YoutubeEnemy, Enemy } from "./enemy";
 import LevelEnd from "./levelend";
+import Birds from "./birds";
+import EndFlag from "./endFlag";
 
 class Game {
+  
   constructor(canvasEl) {
     this.canvas = canvasEl;
     console.log("ol");
@@ -27,7 +30,7 @@ class Game {
     this.live = 3;
     this.score = 0;
     this.gameOver = false;
-    // this.gameWin = false;
+    this.winGame = false;
     this.pause = false;
 
     // Create bottom platform
@@ -38,6 +41,8 @@ class Game {
       this.levelFloor.push(new Level(x, y));
       x += 50;
     }
+
+    this.endFlag = new EndFlag(3160,335);
 
     this.cloud = [
       new Cloud(50, 20),
@@ -138,8 +143,16 @@ class Game {
       new PowerUps(1400, 335),
       new PowerUps(2000, 335),
     ];
+
+    // this.birds = [
+    //   new Birds(300, 205),
+    //   new Birds(1000, 180),
+    //   new Birds(500, 250)
+    // ]
+
+
     this.enemies = [
-      new YoutubeEnemy(0, 335),
+      new YoutubeEnemy(300, 335),
       new YoutubeEnemy(1000, 335),
       new YoutubeEnemy(500, 335),
 
@@ -150,11 +163,12 @@ class Game {
       new TwitterEnemy(1800, 210),
       new TwitterEnemy(2500, 200),
       
-      new InstaEnemy(300, 335),
+      new InstaEnemy(500, 335),
       new InstaEnemy(800, 335),
       new InstaEnemy(2500, 335),
     ];
   }
+  
 
   animate() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -175,14 +189,25 @@ class Game {
     this.collapseEnemy();
     this.parallax();
     this.gameWin();
+    this.drawFlag();
+    this.restartGame()
     // this.startMusic();
     // this.pauseMusic();
 
     this.drinkCoffee();
     // this.restart()
-
     for (let i = 0; i < this.enemies.length; i++) {
       this.enemies[i].move();
+      if(this.live < 0 || this.winGame){
+        return;
+      }
+      // else if(this.pause){
+      //   return;
+      // }
+      // else if(!this.pause){
+        // how to start the game again?
+      // }
+      
     }
 
     requestAnimationFrame(this.animate.bind(this));
@@ -238,6 +263,8 @@ class Game {
     ];
     this.face.dimensions.x = 100
     this.face.dimensions.y = 300
+    this.live = 3
+    this.score = 0
   }
 
   gameover() {}
@@ -261,9 +288,11 @@ class Game {
 
   drawLevelEnd(){
     this.levelEnd.draw(this.ctx);
-  
   }
 
+  drawFlag(){
+    this.endFlag.draw(this.ctx)
+  }
   drawCloud() {
     for (let i = 0; i < this.cloud.length; i++) {
       this.cloud[i].draw(this.ctx);
@@ -274,6 +303,9 @@ class Game {
     for (let i = 0; i < this.enemies.length; i++) {
       this.enemies[i].draw(this.ctx);
     }
+    // for (let i = 0; i < this.birds.length; i++) {
+    //   this.birds[i].draw(this.ctx);
+    // }
   }
 
   drawPlatform() {
@@ -386,13 +418,29 @@ class Game {
 
   gameWin() {
       if (
-        this.face.dimensions.y + this.face.height ===
-          this.levelEnd.y + this.levelEnd.height &&
-        this.face.dimensions.x + this.face.width / 2 > this.levelEnd.x &&
-        this.face.dimensions.x + this.face.width / 2 < this.levelEnd.x + this.levelEnd.width
+        this.face.dimensions.x < this.levelEnd.x + this.levelEnd.width &&
+          this.face.dimensions.x + this.face.width > this.levelEnd.x &&
+        this.face.dimensions.y <  this.levelEnd.y + this.levelEnd.y &&
+        this.face.dimensions.y + this.face.height < this.levelEnd.y
       ) {
         console.log("you win")
+      this.ctx.font = "bold 60px Arial";
+      this.ctx.fillStyle = "green";
+      this.ctx.textAlign = "center";
+      this.ctx.fillText("You Win!", this.canvas.width / 2, this.canvas.height / 2);
+      this.winGame = true;
       }
+    }
+
+    pauseGame(){
+      const myPause = document.getElementById("pause")
+      myPause.addEventListener("click", ()=>{
+        if(!this.pause){
+          this.pause = true
+          return true
+        }
+        return false
+      })
     }
   
 
@@ -418,6 +466,7 @@ class Game {
           .slice(0, i)
           .concat(this.enemies.slice(i + 1));
         this.live -= 1;
+        this.face.reset()
       } else if (
         face.dimensions.y + face.height + face.velocity.y >= enemy.y &&
         face.dimensions.y + face.height <= enemy.y &&
@@ -439,14 +488,14 @@ class Game {
   }
 
   setUpMusic() {
-    const pause = document.getElementById("pause");
-    pause.addEventListener("click", () => {
-      if (this.musicPaused === false) {
-        this.backgroundMusic.pause();
-        this.musicPaused = true;
+    const audio = document.getElementById("audio");
+    audio.addEventListener("click", () => {
+      if (this.musicAudio === false) {
+        this.backgroundMusic.audio();
+        this.musicAudio = true;
       } else {
         this.backgroundMusic.play();
-        this.musicPaused = false;
+        this.musicAudio = false;
       }
     });
   }
@@ -468,20 +517,42 @@ class Game {
   //             this.animate()
   //     })
   //   }
+ 
 
   startGame(){
+    const myDiv = document.getElementById("mainpage-container")
+    const pageDiv = document.getElementById("mainpage")
     const playGame = document.getElementById("play-btn");
+
     playGame.addEventListener("click", () => {
-      
-      if (this.musicPaused === false) {
-        this.backgroundMusic.pause();
-        this.musicPaused = true;
-      } else {
-        this.backgroundMusic.play();
-        this.musicPaused = false;
-      }
+     myDiv.style.display = "none";
+     pageDiv.style.display = "none";
     });
+    if(this.live === 0){
+      myDiv.style.display = "block";
+      pageDiv.style.display ="block";
+    }
   }
+
+  playAgain(){
+    const myDiv = document.getElementById("mainpage-container")
+    const pageDiv = document.getElementById("mainpage")
+   const myHome= document.getElementById("home")
+   myHome.addEventListener("click", ()=>{
+    myDiv.style.display = "block";
+    pageDiv.style.display ="block";
+   })
+  }
+
+  restartGame(){
+    const that = this
+    const myRestart = document.getElementById("restart-btn")
+    myRestart.addEventListener("click", ()=> {
+      that.restart()
+    })
+  }
+  
+
 }
 
 export default Game;

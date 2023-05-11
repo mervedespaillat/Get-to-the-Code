@@ -46,6 +46,13 @@ class Face {
     );
   }
 
+  reset(){
+    this.dimensions = {
+      x: 100,
+      y:300
+    }
+  }
+
   setupInputs() {
     document.addEventListener("keydown", (event) => {
       event.preventDefault();

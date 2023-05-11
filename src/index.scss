@@ -1,4 +1,19 @@
+// @import url("./font/BrunoAceSC-Regular.ttf");
+@font-face {
+    font-family: "bruno";
+    src: url("./font/BrunoAceSC-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Arcade";
+    src: url('font/ARCADE.TTF') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 @import './styles/example.scss'; // style icindeki css dosyasindakileri kullanmamizi saglar
+
 
 #main {
     color: pink
