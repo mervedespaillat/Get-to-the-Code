@@ -1,4 +1,4 @@
-# Get to the Code
+# [Get to the Code](https://pages.github.com/)
 :tired_face:
     Get ready to help a lazy and tired coder in this fun and exciting game! 
     The character needs to reach their desk and laptop to start coding, but the journey won't be easy. Along the way, there are distractions like Instagram, Facebook, and Twitter that can slow them down or even stop them in their tracks. The character will need to avoid these distractions by jumping over them or destroying them to make their way to the finish line. But don't worry, there are power-ups like coffee to help the character stay energized and earn extra points. With simple arrow key movements and space bar and a fun and engaging environment, this game will keep you entertained for hours as you help the character beat the distractions and reach their goal.
