@@ -21,12 +21,12 @@
 
 ## Technologies and Libraries:
 
--Javascript
--Canvas
--HTML
--CSS   
+- Javascript
+- Canvas
+- HTML
+- CSS   
 
-## How to collect coffees
+## Snippets 
   ```
   drinkCoffee() {
     for (let i = 0; i < this.powers.length; i++) {
@@ -43,3 +43,22 @@
     }
   }
 ```
+
+```
+ gameWin() {
+    const happy = new HappyFace(this.face.dimensions.x, this.face.dimensions.y)
+      if (
+        this.face.dimensions.x < this.levelEnd.x + this.levelEnd.width &&
+          this.face.dimensions.x + this.face.width > this.levelEnd.x &&
+        this.face.dimensions.y <  this.levelEnd.y + this.levelEnd.y &&
+        this.face.dimensions.y + this.face.height < this.levelEnd.y
+      ) {
+      this.ctx.font = "bold 60px Arial";
+      this.ctx.fillStyle = "green";
+      this.ctx.textAlign = "center";
+      this.ctx.fillText("You Win!", this.canvas.width / 2, this.canvas.height / 2);
+      happy.draw(this.ctx)
+      this.winGame = true;
+      }
+    }
+    ```
