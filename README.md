@@ -14,7 +14,9 @@
 ## Wireframe
 
 ![Image 5-5-23 at 12 06 AM](https://user-images.githubusercontent.com/102131320/236465297-d768a079-c8a4-4616-943f-ffbf83dbecae.jpg)
-![gameGif](https://github.com/mervedespaillat/get-to-the-code/assets/102131320/61ed9cde-ac79-494d-b943-81e90b7de460)
+![gameGif](https://github.com/mervedespaillat/get-to-the-code/assets/102131320/61ed9cde-ac79-494d-b943-81e90b7de460) 
+![chrome-capture-2023-4-11 (1)](https://github.com/mervedespaillat/get-to-the-code/assets/102131320/38287860-f137-451e-8582-a7fd5d61c635)
+
 
 
 ## Technologies and Libraries:
