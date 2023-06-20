@@ -156,20 +156,16 @@ class Game {
       new YoutubeEnemy(300, 335),
       new YoutubeEnemy(1000, 335),
       new YoutubeEnemy(500, 335),
-      new YoutubeEnemy(750, 335),
-      new YoutubeEnemy(600, 335),
+
 
       new TwitterEnemy(130, 200),
       new TwitterEnemy(400, 240),
       new TwitterEnemy(600, 220),
       new TwitterEnemy(1000, 240),
-      new TwitterEnemy(1800, 210),
-      new TwitterEnemy(2500, 200),
-      
+         
       new InstaEnemy(500, 335),
       new InstaEnemy(800, 335),
-      new InstaEnemy(750, 335),
-      new InstaEnemy(1000, 335),
+      new InstaEnemy(750, 335),  
     ];
   }
   
