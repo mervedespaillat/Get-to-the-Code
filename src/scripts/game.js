@@ -67,13 +67,8 @@ class Game {
       new Cloud(2500, 5),
       new Cloud(2650, 20),
 
-
-      // new Cloud(2850, 20),
-      // new Cloud(3030, 10),
       new Cloud(3200, 5),
       new Cloud(3350, 20),
-
-
     ];
 
     this.levelEnd = new LevelEnd (3030,65)
@@ -115,17 +110,21 @@ class Game {
       new Platform(2140, 250),
 
       new Platform(2300, 250),
+      new Platform(2340, 250),
       new Platform(2440, 230),
+      new Platform(2480, 230),
       new Platform(2580, 210),
+      new Platform(2620, 210),
       new Platform(2720, 190),
+      new Platform(2760, 190),
       new Platform(2860, 170),
+      new Platform(2900, 170),
+
       new Platform(3000, 150),
       new Platform(3040, 150),
       new Platform(3080, 150),
       new Platform(3120, 150),
       new Platform(3160, 150),
-      
-
     ];
 
     this.face.setupInputs();
@@ -190,7 +189,7 @@ class Game {
     this.parallax();
     this.gameWin();
     this.drawFlag();
-    this.restartGame()
+    // this.restartGame()
     // this.startMusic();
     // this.pauseMusic();
 
@@ -344,6 +343,10 @@ class Game {
                     this.powers.forEach(power =>{
                       power.x -=4
                     })
+                    this.enemies.forEach(enemy =>{
+                      enemy.x -= 4
+                    })
+                    //,make enemies here for scroll
                   }
             
                 else if (this.face.leftKey === true && this.scrollOffset>=0) {
@@ -513,12 +516,12 @@ class Game {
     };
   }
 
-  //   restart(){
-  //     const pause = document.getElementById("restart")
-  //     pause.addEventListener("click", ()=>{
-  //             this.animate()
-  //     })
-  //   }
+    restart(){
+      const pause = document.getElementById("restart")
+      pause.addEventListener("click", ()=>{
+              this.animate()
+      })
+    }
  
 
   startGame(){
@@ -536,23 +539,23 @@ class Game {
     }
   }
 
-  playAgain(){
-    const myDiv = document.getElementById("mainpage-container")
-    const pageDiv = document.getElementById("mainpage")
-   const myHome= document.getElementById("home")
-   myHome.addEventListener("click", ()=>{
-    myDiv.style.display = "block";
-    pageDiv.style.display ="block";
-   })
-  }
+  // playAgain(){
+  //   const myDiv = document.getElementById("mainpage-container")
+  //   const pageDiv = document.getElementById("mainpage")
+  //  const myHome= document.getElementById("home")
+  //  myHome.addEventListener("click", ()=>{
+  //   myDiv.style.display = "block";
+  //   pageDiv.style.display ="block";
+  //  })
+  // }
 
-  restartGame(){
-    const that = this
-    const myRestart = document.getElementById("restart-btn")
-    myRestart.addEventListener("click", ()=> {
-      that.restart()
-    })
-  }
+  // restartGame(){
+  //   const that = this
+  //   const myRestart = document.getElementById("restart-btn")
+  //   myRestart.addEventListener("click", ()=> {
+  //     that.restart()
+  //   })
+  // }
   
 
 }
