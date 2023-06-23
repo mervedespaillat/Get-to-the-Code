@@ -4,7 +4,7 @@ class EndFlag{
         this.x = x;
         this.y = y;
         this.image = new Image();
-        this.image.src = "src/images/end.png";
+        this.image.src = "src/images/laugh.png";
         this.width = 100;
         this.height = 75;
       }

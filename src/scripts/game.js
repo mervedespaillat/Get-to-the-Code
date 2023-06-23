@@ -9,6 +9,7 @@ import Birds from "./birds";
 import EndFlag from "./endFlag";
 import HappyFace from "./happyFace";
 
+
 class Game {
   
   constructor(canvasEl) {
@@ -19,7 +20,7 @@ class Game {
     this.face = new Face(this.canvas);
     this.ctx = this.canvas.getContext("2d");
     
-
+    
     //background music
     this.backgroundMusic = new Audio("src/audio/Space-Jazz.mp3");
     this.backgroundMusic.autoplay = false;
@@ -43,7 +44,8 @@ class Game {
       x += 50;
     }
 
-    this.endFlag = new EndFlag(3160,335);
+    this.endFlag = new EndFlag(2730, 155)
+    
 
     this.cloud = [
       new Cloud(50, 20),
@@ -189,30 +191,31 @@ class Game {
     this.parallax();
     this.gameWin();
     this.drawFlag();
-    // this.restartGame()
+    this.drinkCoffee();
+    this.restartGame()
     // this.startMusic();
     // this.pauseMusic();
-
-    this.drinkCoffee();
     // this.restart()
+    if (this.paused) {
+      requestAnimationFrame(this.animate.bind(this));
+      return;
+    }
+
     for (let i = 0; i < this.enemies.length; i++) {
       this.enemies[i].move();
       if(this.live < 0 || this.winGame){
         return;
       }
-      // else if(this.pause){
-      //   return;
-      // }
-      // else if(!this.pause){
-        // how to start the game again?
-      // }
-      
     }
 
+  
     requestAnimationFrame(this.animate.bind(this));
   }
 
-  play() {}
+
+  togglePause() {
+    this.paused = !this.paused;
+  }
 
   restart() { 
     
@@ -224,7 +227,7 @@ class Game {
       x += 50;
     }
 
-  
+   
 
     this.cloud = [
       new Cloud(50, 20),
@@ -292,6 +295,7 @@ class Game {
   drawFlag(){
     this.endFlag.draw(this.ctx)
   }
+
   drawCloud() {
     for (let i = 0; i < this.cloud.length; i++) {
       this.cloud[i].draw(this.ctx);
@@ -320,6 +324,10 @@ class Game {
   }
 
   parallax(){
+    if (this.pause) {
+      this.face.velocity.x = 0
+      return; 
+    }
     if(this.face.rightKey === true && this.face.dimensions.x < 400){
       this.face.velocity.x = 5
 
@@ -327,6 +335,7 @@ class Game {
       this.face.velocity.x = -5
     }
     else{
+      
       this.face.velocity.x = 0
                 if (this.face.rightKey === true) {
                     this.scrollOffset += 4
@@ -369,6 +378,10 @@ class Game {
   }
 
   stand() {
+    // if (this.pause) {
+    //   return; // Exit the method and prevent player movement when the game is paused
+    // }
+  
     this.levelFloor.concat(this.platforms).forEach((ele) => {
       if (
         this.face.dimensions.y + this.face.height + this.face.velocity.y >=
@@ -384,8 +397,11 @@ class Game {
   }
 
   jumpOnce() {
+    if (this.pause) {
+      return; // Exit the method and prevent player movement when the game is paused
+    }
     const platform = this.levelFloor.concat(this.platforms);
-
+  
     for (let i = 0; i < platform.length; i++) {
       if (
         this.face.spaceKey &&
@@ -440,11 +456,13 @@ class Game {
     pauseGame(){
       const myPause = document.getElementById("pause")
       myPause.addEventListener("click", ()=>{
+        this.togglePause()
         if(!this.pause){
           this.pause = true
-          return true
+          return this.pause
         }
-        return false
+
+        return this.pause = false
       })
     }
   
@@ -516,11 +534,41 @@ class Game {
     };
   }
 
-    restart(){
-      const pause = document.getElementById("restart")
+    restartGame(){
+      const pause = document.getElementById("restart-btn")
       pause.addEventListener("click", ()=>{
-              this.animate()
-      })
+        this.face.dimensions.x = 10;
+        this.face.velocity.x = 0;
+      
+        // Reset scroll offset
+        this.scrollOffset = 0;
+      
+        // Reset platform positions
+        this.platforms.forEach((platform, index) => {
+          platform.x = platformPositions[index];
+        });
+      
+        // Reset cloud positions
+        this.cloud.forEach((cloud, index) => {
+          cloud.x = cloudPositions[index];
+        });
+      
+        // Reset level end position
+        this.levelEnd.x = levelEndPosition;
+      
+        // Reset power positions
+        this.powers.forEach((power, index) => {
+          power.x = powerPositions[index];
+        });
+      
+        // Reset enemy positions
+        this.enemies.forEach((enemy, index) => {
+          enemy.x = enemyPositions[index];
+        });
+      
+        // Restart the game loop
+        requestAnimationFrame(this.animate.bind(this));
+      });
     }
  
 

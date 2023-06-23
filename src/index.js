@@ -6,7 +6,7 @@ window.addEventListener("load", function(){
           game.animate()
             game.startGame()
             // game.playAgain()
-            // game.pauseGame()
+            game.pauseGame()
             console.log("hello")    
         })
 
