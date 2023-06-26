@@ -203,7 +203,8 @@ class Game {
 
     for (let i = 0; i < this.enemies.length; i++) {
       this.enemies[i].move();
-      if(this.live < 0 || this.winGame){
+      if(this.live < 0 ){
+        this.endGame()
         return;
       }
     }
@@ -269,7 +270,14 @@ class Game {
     this.score = 0
   }
 
-  gameover() {}
+  endGame() {
+    console.log("game over")
+    this.ctx.font = "bold 60px Arial";
+    this.ctx.fillStyle = "green";
+    this.ctx.textAlign = "center";
+    this.ctx.fillText("Game Over!", this.canvas.width / 2, this.canvas.height / 2);
+    this.gameOver = true;
+  }
 
   drawCanvas() {
     this.ctx.fillStyle = "#D8EDF3";
@@ -339,9 +347,7 @@ class Game {
       this.face.velocity.x = 0
                 if (this.face.rightKey === true) {
                     this.scrollOffset += 4
-                    // this.levelFloor.forEach(level => {
-                    //     level.x -= 4
-                    // })
+                
                     this.platforms.forEach(platform => {
                         platform.x -=4
                     })
@@ -355,13 +361,10 @@ class Game {
                     this.enemies.forEach(enemy =>{
                       enemy.x -= 4
                     })
-                    //,make enemies here for scroll
                   }
             
                 else if (this.face.leftKey === true && this.scrollOffset>=0) {
-                //   this.levelFloor.forEach(level => {
-                //     level.x +=4
-                // })
+        
                 this.scrollOffset -= 4
                 this.platforms.forEach(platform => {
                     platform.x +=4
@@ -378,9 +381,6 @@ class Game {
   }
 
   stand() {
-    // if (this.pause) {
-    //   return; // Exit the method and prevent player movement when the game is paused
-    // }
   
     this.levelFloor.concat(this.platforms).forEach((ele) => {
       if (
@@ -580,10 +580,13 @@ class Game {
     playGame.addEventListener("click", () => {
      myDiv.style.display = "none";
      pageDiv.style.display = "none";
+     const game = new Game(this.canvas)
+     game.animate()
     });
     if(this.live === 0){
       myDiv.style.display = "block";
       pageDiv.style.display ="block";
+
     }
   }
 
