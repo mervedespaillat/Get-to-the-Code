@@ -95,7 +95,7 @@ export class TwitterEnemy extends Enemy{
           y: 1,
         };
 
-      this.xspeed = 0.5
+      this.xspeed = 1
       this.yspeed = 1
     }
 move(){
@@ -118,7 +118,7 @@ export class InstaEnemy extends Enemy{
         y: 1,
       };
 
-    this.xspeed = 0.5
+    this.xspeed = 0.8
     this.yspeed = 1
   }
 move(){

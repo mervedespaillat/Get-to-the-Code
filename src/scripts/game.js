@@ -14,7 +14,6 @@ class Game {
   
   constructor(canvasEl) {
     this.canvas = canvasEl;
-    console.log("ol");
     this.canvas.width = 800;
     this.canvas.height = 400;
     this.face = new Face(this.canvas);
@@ -33,8 +32,15 @@ class Game {
     this.score = 0;
     this.gameOver = false;
     this.winGame = false;
-    this.pause = false;
 
+    this.paused = false;
+    this.playerMovementEnabled = true;
+    const playPauseGameButton = document.getElementById("pause");
+    playPauseGameButton.addEventListener("click", () => {
+    this.togglePause(); // Call the togglePause() method when the button is clicked
+  });
+
+    // this.setupPauseButton()
     // Create bottom platform
     this.levelFloor = [];
     let x = 0;
@@ -186,16 +192,17 @@ class Game {
     // this.face.jump();
     this.jumpOnce();
     this.drawEnemy();
+    this.gameWin();
     // this.moveBackground();
     this.collapseEnemy();
     this.parallax();
-    this.gameWin();
     this.drawFlag();
     this.drinkCoffee();
-    this.restartGame()
+    // this.restartGame()
     // this.startMusic();
     // this.pauseMusic();
     // this.restart()
+
     if (this.paused) {
       requestAnimationFrame(this.animate.bind(this));
       return;
@@ -209,6 +216,10 @@ class Game {
       }
     }
 
+    if(this.winGame){
+      return;
+    }
+
   
     requestAnimationFrame(this.animate.bind(this));
   }
@@ -216,7 +227,14 @@ class Game {
 
   togglePause() {
     this.paused = !this.paused;
+    if (this.paused ) {
+      this.backgroundMusic.pause(); 
+      this.playerMovementEnabled = false; 
+    } else {
+      this.backgroundMusic.play();
+    }
   }
+
 
   restart() { 
     
@@ -271,7 +289,6 @@ class Game {
   }
 
   endGame() {
-    console.log("game over")
     this.ctx.font = "bold 60px Arial";
     this.ctx.fillStyle = "green";
     this.ctx.textAlign = "center";
@@ -283,7 +300,7 @@ class Game {
     this.ctx.fillStyle = "#D8EDF3";
     this.ctx.fillRect(0, 0, 800, 400);
     // debugger
-    this.ctx.strokeText(`Score: ${this.score}`, 20, 20);
+    this.ctx.strokeText(`Score: ${this.score}`, 50, 20);
     this.ctx.strokeText(`Live: ${this.live}`, 700, 20);
 
     this.ctx.font = "20px Arial";
@@ -314,9 +331,6 @@ class Game {
     for (let i = 0; i < this.enemies.length; i++) {
       this.enemies[i].draw(this.ctx);
     }
-    // for (let i = 0; i < this.birds.length; i++) {
-    //   this.birds[i].draw(this.ctx);
-    // }
   }
 
   drawPlatform() {
@@ -332,7 +346,7 @@ class Game {
   }
 
   parallax(){
-    if (this.pause) {
+    if (this.paused) {
       this.face.velocity.x = 0
       return; 
     }
@@ -397,8 +411,8 @@ class Game {
   }
 
   jumpOnce() {
-    if (this.pause) {
-      return; // Exit the method and prevent player movement when the game is paused
+    if (this.paused) {
+      return; 
     }
     const platform = this.levelFloor.concat(this.platforms);
   
@@ -410,7 +424,6 @@ class Game {
         this.face.dimensions.x + this.face.width / 2 <
           platform[i].x + platform[i].width
       ) {
-        console.log("jumped");
         this.face.jump();
         break;
       }
@@ -420,17 +433,14 @@ class Game {
   drinkCoffee() {
     for (let i = 0; i < this.powers.length; i++) {
       const coffee = this.powers[i];
-      // console.log(this.face.dimensions.y + this.face.height)
       if (
         this.face.dimensions.y + this.face.height ===
           coffee.y + coffee.height &&
         this.face.dimensions.x + this.face.width / 2 > coffee.x &&
         this.face.dimensions.x + this.face.width / 2 < coffee.x + coffee.width
       ) {
-        //    console.log("coffee crush")
         this.powers = this.powers.slice(0, i).concat(this.powers.slice(i + 1));
         this.score += 50;
-        // add here score up after coffee got eaten
       }
     }
   }
@@ -443,7 +453,6 @@ class Game {
         this.face.dimensions.y <  this.levelEnd.y + this.levelEnd.y &&
         this.face.dimensions.y + this.face.height < this.levelEnd.y
       ) {
-        console.log("you win")
       this.ctx.font = "bold 60px Arial";
       this.ctx.fillStyle = "green";
       this.ctx.textAlign = "center";
@@ -452,20 +461,6 @@ class Game {
       this.winGame = true;
       }
     }
-
-    pauseGame(){
-      const myPause = document.getElementById("pause")
-      myPause.addEventListener("click", ()=>{
-        this.togglePause()
-        if(!this.pause){
-          this.pause = true
-          return this.pause
-        }
-
-        return this.pause = false
-      })
-    }
-  
 
   //ENEMIES
   collapseEnemy() {
@@ -513,12 +508,12 @@ class Game {
   setUpMusic() {
     const audio = document.getElementById("audio");
     audio.addEventListener("click", () => {
-      if (this.musicAudio === false) {
-        this.backgroundMusic.audio();
-        this.musicAudio = true;
-      } else {
+      if (this.backgroundMusic.paused) {
         this.backgroundMusic.play();
-        this.musicAudio = false;
+        audio.classList.remove("paused"); 
+      } else {
+        this.backgroundMusic.pause();
+        audio.classList.add("paused");
       }
     });
   }
@@ -534,42 +529,42 @@ class Game {
     };
   }
 
-    restartGame(){
-      const pause = document.getElementById("restart-btn")
-      pause.addEventListener("click", ()=>{
-        this.face.dimensions.x = 10;
-        this.face.velocity.x = 0;
+    // restartGame(){
+    //   const pause = document.getElementById("restart-btn")
+    //   pause.addEventListener("click", ()=>{
+    //     this.face.dimensions.x = 10;
+    //     this.face.velocity.x = 0;
       
-        // Reset scroll offset
-        this.scrollOffset = 0;
+    //     // Reset scroll offset
+    //     this.scrollOffset = 0;
       
-        // Reset platform positions
-        this.platforms.forEach((platform, index) => {
-          platform.x = platformPositions[index];
-        });
+    //     // Reset platform positions
+    //     this.platforms.forEach((platform, index) => {
+    //       platform.x = platformPositions[index];
+    //     });
       
-        // Reset cloud positions
-        this.cloud.forEach((cloud, index) => {
-          cloud.x = cloudPositions[index];
-        });
+    //     // Reset cloud positions
+    //     this.cloud.forEach((cloud, index) => {
+    //       cloud.x = cloudPositions[index];
+    //     });
       
-        // Reset level end position
-        this.levelEnd.x = levelEndPosition;
+    //     // Reset level end position
+    //     this.levelEnd.x = levelEndPosition;
       
-        // Reset power positions
-        this.powers.forEach((power, index) => {
-          power.x = powerPositions[index];
-        });
+    //     // Reset power positions
+    //     this.powers.forEach((power, index) => {
+    //       power.x = powerPositions[index];
+    //     });
       
-        // Reset enemy positions
-        this.enemies.forEach((enemy, index) => {
-          enemy.x = enemyPositions[index];
-        });
+    //     // Reset enemy positions
+    //     this.enemies.forEach((enemy, index) => {
+    //       enemy.x = enemyPositions[index];
+    //     });
       
-        // Restart the game loop
-        requestAnimationFrame(this.animate.bind(this));
-      });
-    }
+    //     // Restart the game loop
+    //     requestAnimationFrame(this.animate.bind(this));
+    //   });
+    // }
  
 
   startGame(){
