@@ -145,6 +145,6 @@ export class YoutubeEnemy extends Enemy{
     this.yspeed = 1
   }
 move(){
-this.x += this.xspeed
+this.x -= this.xspeed
 }
 }

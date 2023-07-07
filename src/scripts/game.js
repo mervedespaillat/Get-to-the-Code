@@ -162,17 +162,31 @@ class Game {
     this.enemies = [
       new YoutubeEnemy(300, 335),
       new YoutubeEnemy(1000, 335),
-      new YoutubeEnemy(500, 335),
+      new YoutubeEnemy(3200, 335),
+      new YoutubeEnemy(2900, 335),
+      // new YoutubeEnemy(780, 335),
+      new YoutubeEnemy(3500, 335),
+      new YoutubeEnemy(900, 335),
+      // new YoutubeEnemy(1300, 335),
+      new YoutubeEnemy(1800, 335),
+      new YoutubeEnemy(2200, 335),
 
 
       new TwitterEnemy(130, 200),
-      new TwitterEnemy(400, 240),
+      // new TwitterEnemy(400, 240),
+      new TwitterEnemy(500, 240),
+      new TwitterEnemy(750, 240),
       new TwitterEnemy(600, 220),
       new TwitterEnemy(1000, 240),
          
       new InstaEnemy(500, 335),
-      new InstaEnemy(800, 335),
+      new InstaEnemy(3000, 335),
       new InstaEnemy(750, 335),  
+      new InstaEnemy(2500, 335),  
+      // new InstaEnemy(650, 335),  
+      new InstaEnemy(1100, 335),  
+      new InstaEnemy(1500, 335),  
+      new InstaEnemy(2000, 335),  
     ];
   }
   
@@ -210,7 +224,8 @@ class Game {
 
     for (let i = 0; i < this.enemies.length; i++) {
       this.enemies[i].move();
-      if(this.live < 0 ){
+      if(this.live <= 0 ){
+        this.live = 0
         this.endGame()
         return;
       }
@@ -228,11 +243,12 @@ class Game {
   togglePause() {
     this.paused = !this.paused;
     if (this.paused ) {
-      this.backgroundMusic.pause(); 
+      // this.backgroundMusic.pause(); 
       this.playerMovementEnabled = false; 
-    } else {
-      this.backgroundMusic.play();
-    }
+    } 
+    // else {
+    //   this.backgroundMusic.play();
+    // }
   }
 
 
@@ -301,7 +317,7 @@ class Game {
     this.ctx.fillRect(0, 0, 800, 400);
     // debugger
     this.ctx.strokeText(`Score: ${this.score}`, 50, 20);
-    this.ctx.strokeText(`Live: ${this.live}`, 700, 20);
+    this.ctx.strokeText(`Lives: ${this.live}`, 700, 20);
 
     this.ctx.font = "20px Arial";
   }
@@ -418,11 +434,15 @@ class Game {
   
     for (let i = 0; i < platform.length; i++) {
       if (
-        this.face.spaceKey &&
+        (this.face.spaceKey &&
         this.face.dimensions.y + this.face.height === platform[i].y &&
         this.face.dimensions.x + this.face.width / 2 > platform[i].x &&
         this.face.dimensions.x + this.face.width / 2 <
-          platform[i].x + platform[i].width
+          platform[i].x + platform[i].width) ||   (this.face.upKey &&
+            this.face.dimensions.y + this.face.height === platform[i].y &&
+            this.face.dimensions.x + this.face.width / 2 > platform[i].x &&
+            this.face.dimensions.x + this.face.width / 2 <
+              platform[i].x + platform[i].width)
       ) {
         this.face.jump();
         break;
@@ -585,15 +605,15 @@ class Game {
     }
   }
 
-  // playAgain(){
-  //   const myDiv = document.getElementById("mainpage-container")
-  //   const pageDiv = document.getElementById("mainpage")
-  //  const myHome= document.getElementById("home")
-  //  myHome.addEventListener("click", ()=>{
-  //   myDiv.style.display = "block";
-  //   pageDiv.style.display ="block";
-  //  })
-  // }
+  playAgain(){
+    const myDiv = document.getElementById("mainpage-container")
+    const pageDiv = document.getElementById("mainpage")
+   const myHome= document.getElementById("home")
+   myHome.addEventListener("click", ()=>{
+    myDiv.style.display = "block";
+    pageDiv.style.display ="block";
+   })
+  }
 
   // restartGame(){
   //   const that = this

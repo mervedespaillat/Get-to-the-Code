@@ -5,6 +5,7 @@ window.addEventListener("load", function(){
           const game =   new Game(canvasEl)
           game.animate();
           game.startGame();
+          game.playAgain()
         })
 
 

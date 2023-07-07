@@ -32,6 +32,7 @@ class Face {
     this.leftKey = false;
     this.rightKey = false;
     this.spaceKey = false;
+    this.upKey = false;
     
       this.img = new Image();
       this.img.src = "src/images/tired.png";
@@ -66,6 +67,8 @@ class Face {
         this.leftKey = true;
       } else if (event.key === " ") {
         this.spaceKey = true;
+      } else if(event.key === "ArrowUp"){
+        this.upKey = true;
       }
     });
     document.addEventListener("keyup", (event) => {
@@ -75,6 +78,8 @@ class Face {
         this.leftKey = false;
       } else if (event.key === " ") {
         this.spaceKey = false;
+      } else if( event.key === "ArrowUp"){
+        this.upKey = false;
       }
     });
   }
@@ -113,7 +118,7 @@ step() {
 jump(){
     
       //Vertical
-      if (this.spaceKey && this.dimensions.y > 0) {
+      if ( (this.spaceKey && this.dimensions.y > 0) || (this.upKey && this.dimensions.y > 0)) {
         this.velocity.y = -this.yspeed;
       } else if (this.dimensions.y + this.height + this.velocity.y < this.canvas.height) {
         this.velocity.y += CONSTANT.gravity;
