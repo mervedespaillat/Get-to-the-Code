@@ -50,7 +50,7 @@ class Game {
       x += 50;
     }
 
-    this.endFlag = new EndFlag(2730, 155)
+    this.endFlag = new EndFlag(1500, 155)
     
 
     this.cloud = [
@@ -167,7 +167,7 @@ class Game {
       // new YoutubeEnemy(780, 335),
       new YoutubeEnemy(3500, 335),
       new YoutubeEnemy(900, 335),
-      // new YoutubeEnemy(1300, 335),
+      new YoutubeEnemy(3800, 335),
       new YoutubeEnemy(1800, 335),
       new YoutubeEnemy(2200, 335),
 
@@ -183,7 +183,7 @@ class Game {
       new InstaEnemy(3000, 335),
       new InstaEnemy(750, 335),  
       new InstaEnemy(2500, 335),  
-      // new InstaEnemy(650, 335),  
+      new InstaEnemy(4000, 335),  
       new InstaEnemy(1100, 335),  
       new InstaEnemy(1500, 335),  
       new InstaEnemy(2000, 335),  
@@ -262,7 +262,8 @@ class Game {
       x += 50;
     }
 
-   
+    this.endFlag = new EndFlag(1500, 155)
+
 
     this.cloud = [
       new Cloud(50, 20),
@@ -361,54 +362,112 @@ class Game {
     }
   }
 
-  parallax(){
-    if (this.paused) {
-      this.face.velocity.x = 0
-      return; 
-    }
-    if(this.face.rightKey === true && this.face.dimensions.x < 400){
-      this.face.velocity.x = 5
+  // parallax(){
+  //   if (this.paused) {
+  //     this.face.velocity.x = 0
+  //     return; 
+  //   }
+  //   if(this.face.rightKey === true && this.face.dimensions.x < 400){
+  //     this.face.velocity.x = 5
 
-    } else if((this.face.leftKey === true && this.face.dimensions.x > 10 ) ||( this.face.leftKey === true && this.scrollOffset === 0)){
-      this.face.velocity.x = -5
-    }
-    else{
+  //   } else if((this.face.leftKey === true && this.face.dimensions.x > 10 ) ||( this.face.leftKey === true && this.scrollOffset === 0)){
+  //     this.face.velocity.x = -5
+  //   }
+  //   else{
       
-      this.face.velocity.x = 0
-                if (this.face.rightKey === true) {
-                    this.scrollOffset += 4
+  //     this.face.velocity.x = 0
+  //               if (this.face.rightKey === true) {
+  //                   this.scrollOffset += 4
                 
-                    this.platforms.forEach(platform => {
-                        platform.x -=4
-                    })
-                    this.cloud.forEach(cloud => {
-                        cloud.x -=4
-                    })
-                    this.levelEnd.x -=4
-                    this.powers.forEach(power =>{
-                      power.x -=4
-                    })
-                    this.enemies.forEach(enemy =>{
-                      enemy.x -= 4
-                    })
-                  }
+  //                   this.platforms.forEach(platform => {
+  //                       platform.x -=4
+  //                   })
+  //                   this.cloud.forEach(cloud => {
+  //                       cloud.x -=4
+  //                   })
+  //                   this.levelEnd.x -=4
+  //                   this.powers.forEach(power =>{
+  //                     power.x -=4
+  //                   })
+  //                   this.enemies.forEach(enemy =>{
+  //                     enemy.x -= 4
+  //                   })
+  //                 }
             
-                else if (this.face.leftKey === true && this.scrollOffset>=0) {
+  //               else if (this.face.leftKey === true && this.scrollOffset>=0) {
         
-                this.scrollOffset -= 4
-                this.platforms.forEach(platform => {
-                    platform.x +=4
-                })
-                this.levelEnd.x +=4
-                this.cloud.forEach(cloud => {
-                    cloud.x +=4
-                })
-                this.powers.forEach(power =>{
-                  power.x += 4
-                })
-              }
+  //               this.scrollOffset -= 4
+  //               this.platforms.forEach(platform => {
+  //                   platform.x +=4
+  //               })
+  //               this.levelEnd.x +=4
+  //               this.cloud.forEach(cloud => {
+  //                   cloud.x +=4
+  //               })
+  //               this.powers.forEach(power =>{
+  //                 power.x += 4
+  //               })
+  //             }
+  //   }
+  // }
+
+  parallax() {
+    if (this.paused) {
+      this.face.velocity.x = 0;
+      return;
+    }
+  
+    if (this.face.rightKey === true && this.face.dimensions.x < 400) {
+      this.face.velocity.x = 5;
+    } else if (
+      (this.face.leftKey === true && this.face.dimensions.x > 10) ||
+      (this.face.leftKey === true && this.scrollOffset === 0)
+    ) {
+      this.face.velocity.x = -5;
+    } else {
+      this.face.velocity.x = 0;
+  
+      if (this.face.rightKey === true) {
+        if (this.scrollOffset + this.canvas.width < 3450) {
+          this.scrollOffset += 4;
+          this.platforms.forEach((platform) => {
+            platform.x -= 4;
+          });
+          this.cloud.forEach((cloud) => {
+            cloud.x -= 4;
+          });
+          this.levelEnd.x -= 4;
+          this.powers.forEach((power) => {
+            power.x -= 4;
+          });
+          this.enemies.forEach((enemy) => {
+            enemy.x -= 4;
+          });
+        }
+      } else if (
+        this.face.leftKey === true &&
+        this.scrollOffset >= 0 &&
+        this.face.dimensions.x > 3450
+      ) {
+        this.face.velocity.x = 0;
+        this.face.dimensions.x = 3450;
+        return;
+      } else if (this.face.leftKey === true && this.scrollOffset >= 0) {
+        this.scrollOffset -= 4;
+        this.platforms.forEach((platform) => {
+          platform.x += 4;
+        });
+        this.levelEnd.x += 4;
+        this.cloud.forEach((cloud) => {
+          cloud.x += 4;
+        });
+        this.powers.forEach((power) => {
+          power.x += 4;
+        });
+      }
     }
   }
+  
 
   stand() {
   
