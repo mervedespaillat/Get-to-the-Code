@@ -2,10 +2,20 @@ import Game from './scripts/game';
 
 window.addEventListener("load", function(){
       const canvasEl = document.getElementById("main-canvas")
-          const game =   new Game(canvasEl)
-          game.animate();
-          game.startGame();
-          game.playAgain()
+      //     const game =   new Game(canvasEl)
+      //     game.animate();
+          
+      const myDiv = document.getElementById("mainpage-container")
+      const pageDiv = document.getElementById("mainpage")
+      const playGame = document.getElementById("play-btn");
+      
+      playGame.addEventListener("click", () => {
+        myDiv.style.display = "none";
+        pageDiv.style.display = "none";
+        const game = new Game(canvasEl)
+        game.animate()
+        game.playAgain()
+          });
         })
 
 

@@ -51,7 +51,7 @@
         <img id="home" src="./src/images/home.png" alt="home-button" />
       </a>
     
-    <h1 id="game-title">Get to the code</h1>
+    <h1 id="game-title">Get to the <span> code</span> </h1>
     <div id="m-canvas">
       <canvas id="main-canvas"></canvas>
     </div>
@@ -91,10 +91,14 @@
           <p id="game-explanation">
             In this game, you'll help a lazy coder dodge distractions like Instagram, Facebook, and Twitter on their way to their desk and laptop. Just remember getting hit by a distraction is like getting hit by a bus - it's gonna hurt!</p>
         </div>
-      <!-- <div id="buttons"> -->
-        <!-- <button id="restart"> Restart</button> -->
-        <!-- <button id="play-btn">Play</button>
-      </div>  -->
-    </div>
+      </div>
+      <div id="game-over-screen" style="display: none;">
+        <h1 id="game-over-text">Game Over</h1>
+        <button id="play-again-button">Play Again</button>
+      </div>  
+      <div id="game-win-screen" style="display: none;">
+        <h1 id="game-win-text">You Win!</h1>
+        <button id="play-again-button-win">Play Again</button>
+      </div>  
   </body>
 </html>

@@ -18,6 +18,8 @@ class Game {
     this.canvas.height = 400;
     this.face = new Face(this.canvas);
     this.ctx = this.canvas.getContext("2d");
+
+    
     
     
     //background music
@@ -173,7 +175,9 @@ class Game {
 
 
       new TwitterEnemy(130, 200),
+      new TwitterEnemy(0, 200),
       // new TwitterEnemy(400, 240),
+
       new TwitterEnemy(500, 240),
       new TwitterEnemy(750, 240),
       new TwitterEnemy(600, 220),
@@ -224,8 +228,8 @@ class Game {
 
     for (let i = 0; i < this.enemies.length; i++) {
       this.enemies[i].move();
-      if(this.live <= 0 ){
-        this.live = 0
+      if(this.live <= 0){
+        console.log(this.live)
         this.endGame()
         return;
       }
@@ -243,76 +247,103 @@ class Game {
   togglePause() {
     this.paused = !this.paused;
     if (this.paused ) {
-      // this.backgroundMusic.pause(); 
       this.playerMovementEnabled = false; 
     } 
-    // else {
-    //   this.backgroundMusic.play();
-    // }
   }
 
 
   restart() { 
     
-    this.levelFloor = [];
-    let x = 0;
-    for (let i = 0; i < 16; i++) {
-      let y = 365;
-      this.levelFloor.push(new Level(x, y));
-      x += 50;
-    }
+    // this.levelFloor = [];
+    // let x = 0;
+    // for (let i = 0; i < 16; i++) {
+    //   let y = 365;
+    //   this.levelFloor.push(new Level(x, y));
+    //   x += 50;
+    // }
 
-    this.endFlag = new EndFlag(1500, 155)
+    // this.endFlag = new EndFlag(1500, 155)
 
 
-    this.cloud = [
-      new Cloud(50, 20),
-      new Cloud(230, 10),
-      new Cloud(400, 5),
-      new Cloud(550, 20),
-    ];
+    // this.cloud = [
+    //   new Cloud(50, 20),
+    //   new Cloud(230, 10),
+    //   new Cloud(400, 5),
+    //   new Cloud(550, 20),
+    // ];
 
-    this.platforms = [
-      new Platform(120, 230),
-      new Platform(160, 230),
-      new Platform(200, 230),
+    // this.platforms = [
+    //   new Platform(120, 230),
+    //   new Platform(160, 230),
+    //   new Platform(200, 230),
 
-      new Platform(360, 270),
-      new Platform(400, 270),
+    //   new Platform(360, 270),
+    //   new Platform(400, 270),
 
-      new Platform(700, 250),
-      new Platform(660, 250),
-      new Platform(620, 250),
+    //   new Platform(700, 250),
+    //   new Platform(660, 250),
+    //   new Platform(620, 250),
   
-    ];
+    // ];
 
-    this.face.setupInputs();
+    // this.face.setupInputs();
 
-    this.powers = [
-      new PowerUps(200, 335),
-      new PowerUps(160, 200),
-      new PowerUps(660, 220),
-    ];
-    this.enemies = [
-      new YoutubeEnemy(0, 335),
-      new TwitterEnemy(130, 200),
-      new TwitterEnemy(400, 240),
-      new InstaEnemy(300, 335),
-    ];
-    this.face.dimensions.x = 100
-    this.face.dimensions.y = 300
-    this.live = 3
-    this.score = 0
+    // this.powers = [
+    //   new PowerUps(200, 335),
+    //   new PowerUps(160, 200),
+    //   new PowerUps(660, 220),
+    // ];
+    // this.enemies = [
+    //   new YoutubeEnemy(0, 335),
+    //   new TwitterEnemy(130, 200),
+    //   new TwitterEnemy(400, 240),
+    //   new InstaEnemy(300, 335),
+    // ];
+    // this.face.dimensions.x = 100
+    // this.face.dimensions.y = 300
+    // this.live = 3
+    // this.score = 0
   }
 
+  // endGame() {
+  //   // if (this.gameOver) {
+  //   //   return;
+  //   // }
+  //   if(this.live <= 0 ){
+  //     console.log("burasi")
+  //     // this.ctx.font = "bold 60px Arial";
+  //     // this.ctx.fillStyle = "green";
+  //     // this.ctx.textAlign = "center";
+  //     // this.ctx.fillText("Game Over!", this.canvas.width / 2, this.canvas.height / 2);
+  //     const playAgainButton = document.getElementById("play-again-button")
+  //     const gameOverScreen = document.getElementById("game-over-screen")
+  //     gameOverScreen.style.display = "block"
+  //     playAgainButton.addEventListener("click", () => {
+  //       gameOverScreen.style.display = "none"
+  //       const game = new Game(this.canvas)
+  //       game.animate()
+  //     })
+  //   }
+  // }
   endGame() {
-    this.ctx.font = "bold 60px Arial";
-    this.ctx.fillStyle = "green";
-    this.ctx.textAlign = "center";
-    this.ctx.fillText("Game Over!", this.canvas.width / 2, this.canvas.height / 2);
-    this.gameOver = true;
-  }
+    if (this.live <= 0) {
 
+      const playAgainButton = document.getElementById("play-again-button");
+      const gameOverScreen = document.getElementById("game-over-screen");
+      gameOverScreen.style.display = "block";
+  
+      const restartGame = () => {
+        gameOverScreen.style.display = "none";
+        playAgainButton.removeEventListener("click", restartGame);
+        const game = new Game(this.canvas);
+        game.animate();
+      };
+  
+      playAgainButton.addEventListener("click", restartGame);
+    }
+  }
+  
+  
   drawCanvas() {
     this.ctx.fillStyle = "#D8EDF3";
     this.ctx.fillRect(0, 0, 800, 400);
@@ -532,10 +563,19 @@ class Game {
         this.face.dimensions.y <  this.levelEnd.y + this.levelEnd.y &&
         this.face.dimensions.y + this.face.height < this.levelEnd.y
       ) {
-      this.ctx.font = "bold 60px Arial";
-      this.ctx.fillStyle = "green";
-      this.ctx.textAlign = "center";
-      this.ctx.fillText("You Win!", this.canvas.width / 2, this.canvas.height / 2);
+      const playAgainButton = document.getElementById("play-again-button-win");
+      const gameWinScreen = document.getElementById("game-win-screen");
+      gameWinScreen.style.display = "block";
+  
+      const restartGame = () => {
+        console.log("hello")
+        gameWinScreen.style.display = "none";
+        playAgainButton.removeEventListener("click", restartGame);
+        const game = new Game(this.canvas);
+        game.animate();
+      };
+      console.log("heloo123")
+      playAgainButton.addEventListener("click", restartGame);
       happy.draw(this.ctx)
       this.winGame = true;
       }
@@ -543,6 +583,7 @@ class Game {
 
   //ENEMIES
   collapseEnemy() {
+    const tolerance = 15
     for (let i = 0; i < this.enemies.length; i++) {
       const enemy = this.enemies[i];
       const face = this.face;
@@ -562,13 +603,18 @@ class Game {
         this.enemies = this.enemies
           .slice(0, i)
           .concat(this.enemies.slice(i + 1));
-        this.live -= 1;
+        this.live --;
         this.face.reset()
+        break;
       } else if (
-        face.dimensions.y + face.height + face.velocity.y >= enemy.y &&
-        face.dimensions.y + face.height <= enemy.y &&
-        face.dimensions.x + face.width / 2 >= enemy.x &&
-        face.dimensions.x + face.width / 2 <= enemy.x + enemy.width
+        // face.dimensions.y + face.height + face.velocity.y >= enemy.y &&
+        // face.dimensions.y + face.height <= enemy.y &&
+        // face.dimensions.x + face.width / 2 >= enemy.x &&
+        // face.dimensions.x + face.width / 2 <= enemy.x + enemy.width
+        face.dimensions.y + face.height + face.velocity.y + tolerance >= enemy.y &&
+        face.dimensions.y + tolerance <= enemy.y + enemy.height &&
+        face.dimensions.x + face.width / 2 + tolerance >= enemy.x &&
+        face.dimensions.x + face.width / 2 - tolerance <= enemy.x + enemy.width
       ) {
         this.enemies = this.enemies
           .slice(0, i)
@@ -608,79 +654,44 @@ class Game {
     };
   }
 
-    // restartGame(){
-    //   const pause = document.getElementById("restart-btn")
-    //   pause.addEventListener("click", ()=>{
-    //     this.face.dimensions.x = 10;
-    //     this.face.velocity.x = 0;
-      
-    //     // Reset scroll offset
-    //     this.scrollOffset = 0;
-      
-    //     // Reset platform positions
-    //     this.platforms.forEach((platform, index) => {
-    //       platform.x = platformPositions[index];
-    //     });
-      
-    //     // Reset cloud positions
-    //     this.cloud.forEach((cloud, index) => {
-    //       cloud.x = cloudPositions[index];
-    //     });
-      
-    //     // Reset level end position
-    //     this.levelEnd.x = levelEndPosition;
-      
-    //     // Reset power positions
-    //     this.powers.forEach((power, index) => {
-    //       power.x = powerPositions[index];
-    //     });
-      
-    //     // Reset enemy positions
-    //     this.enemies.forEach((enemy, index) => {
-    //       enemy.x = enemyPositions[index];
-    //     });
-      
-    //     // Restart the game loop
-    //     requestAnimationFrame(this.animate.bind(this));
-    //   });
-    // }
+
  
 
   startGame(){
     const myDiv = document.getElementById("mainpage-container")
     const pageDiv = document.getElementById("mainpage")
     const playGame = document.getElementById("play-btn");
+    const gameOverScreen = document.getElementById("game-over-screen");
 
     playGame.addEventListener("click", () => {
      myDiv.style.display = "none";
      pageDiv.style.display = "none";
+     gameOverScreen.style.display = "none";
      const game = new Game(this.canvas)
      game.animate()
     });
-    if(this.live === 0){
+    if(this.live <= 0){
       myDiv.style.display = "block";
       pageDiv.style.display ="block";
+      gameOverScreen.style.display = "block"
+    } 
 
-    }
   }
 
   playAgain(){
     const myDiv = document.getElementById("mainpage-container")
     const pageDiv = document.getElementById("mainpage")
    const myHome= document.getElementById("home")
+    const gameOverScreen = document.getElementById("game-over-screen")
+
    myHome.addEventListener("click", ()=>{
     myDiv.style.display = "block";
     pageDiv.style.display ="block";
+    gameOverScreen.style.display = "none"
    })
   }
 
-  // restartGame(){
-  //   const that = this
-  //   const myRestart = document.getElementById("restart-btn")
-  //   myRestart.addEventListener("click", ()=> {
-  //     that.restart()
-  //   })
-  // }
+
   
 
 }
